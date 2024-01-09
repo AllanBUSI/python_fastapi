@@ -1,4 +1,10 @@
 import mysql.connector
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from tools import hash
+
+
+
 
 def connect():
     mydb = mysql.connector.connect(
@@ -28,16 +34,15 @@ def select(mydb, champs, table, where, param):
     myresult = mydb.fetchall()
     return myresult
 
+def insert(mydb,tables,  champs,params, values):
+    sql = "INSERT INTO "+tables+" ("+champs+") VALUES "+params+";"
+    mydbs = mydb.cursor()
+    mydbs.execute(sql, values)
+    mydb.commit()
+    return
+    
 def disconnect(mydb):
     return mydb.close()
 
-
-mydb = connect()
-select = select(mydb, '*', 'user', 'username = %s', ('JeanDamequirie',))
-
-for x in select:
-    print(x[1])
-
-disconnect(mydb)
 
 
