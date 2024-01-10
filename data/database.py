@@ -1,7 +1,7 @@
 import mysql.connector
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from tools import hash
+from tools import hashs
 
 
 
